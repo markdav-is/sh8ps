@@ -136,15 +136,15 @@
     <Compile Include="Services\SuspendAndResumeService.cs" />
     <Compile Include="Services\SuspensionState.cs" />
     <Compile Include="Services\ThemeSelectorService.cs" />
-    <Compile Include="ViewModels\BlankViewModel.cs" />
+    <Compile Include="ViewModels\ShapeViewModel.cs" />
     <Compile Include="ViewModels\ChartViewModel.cs" />
     <Compile Include="ViewModels\MainViewModel.cs" />
     <Compile Include="ViewModels\SettingsViewModel.cs" />
     <Compile Include="ViewModels\ShellNavigationItem.cs" />
     <Compile Include="ViewModels\ShellViewModel.cs" />
     <Compile Include="ViewModels\ViewModelLocator.cs" />
-    <Compile Include="Views\BlankPage.xaml.cs">
-      <DependentUpon>BlankPage.xaml</DependentUpon>
+    <Compile Include="Views\ShapePage.xaml.cs">
+      <DependentUpon>ShapePage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\ChartPage.xaml.cs">
       <DependentUpon>ChartPage.xaml</DependentUpon>
@@ -193,7 +193,7 @@
       <Generator>MSBuild:Compile</Generator>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Page>
-    <Page Include="Views\BlankPage.xaml">
+    <Page Include="Views\ShapePage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

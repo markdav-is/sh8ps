@@ -18,7 +18,7 @@ namespace Sh8ps.ViewModels
             SimpleIoc.Default.Register(() => new NavigationServiceEx());
             SimpleIoc.Default.Register<ShellViewModel>();
             Register<MainViewModel, MainPage>();
-            Register<BlankViewModel, BlankPage>();
+            Register<ShapeViewModel, ShapePage>();
             Register<ChartViewModel, ChartPage>();
             Register<SettingsViewModel, SettingsPage>();
         }
@@ -27,7 +27,7 @@ namespace Sh8ps.ViewModels
 
         public ChartViewModel ChartViewModel => ServiceLocator.Current.GetInstance<ChartViewModel>();
 
-        public BlankViewModel BlankViewModel => ServiceLocator.Current.GetInstance<BlankViewModel>();
+        public ShapeViewModel BlankViewModel => ServiceLocator.Current.GetInstance<ShapeViewModel>();
 
         public MainViewModel MainViewModel => ServiceLocator.Current.GetInstance<MainViewModel>();
 

@@ -6,14 +6,14 @@ using Windows.UI.Xaml.Controls;
 
 namespace Sh8ps.Views
 {
-    public sealed partial class BlankPage : Page
+    public sealed partial class ShapePage : Page
     {
-        private BlankViewModel ViewModel
+        private ShapeViewModel ViewModel
         {
-            get { return DataContext as BlankViewModel; }
+            get { return DataContext as ShapeViewModel; }
         }
 
-        public BlankPage()
+        public ShapePage()
         {
             InitializeComponent();
         }

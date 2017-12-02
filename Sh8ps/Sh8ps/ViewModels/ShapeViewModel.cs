@@ -4,9 +4,9 @@ using GalaSoft.MvvmLight;
 
 namespace Sh8ps.ViewModels
 {
-    public class BlankViewModel : ViewModelBase
+    public class ShapeViewModel : ViewModelBase
     {
-        public BlankViewModel()
+        public ShapeViewModel()
         {
         }
     }
