@@ -5,5 +5,11 @@
     <Style TargetType="Page" x:Key="PageStyle">
         <Setter Property="Background" Value="{ThemeResource ApplicationPageBackgroundThemeBrush}" />
     </Style>
+    <LinearGradientBrush x:Key="backgroundBrush" StartPoint="0.5, 0" EndPoint="0.5,1">
+        <LinearGradientBrush.GradientStops>
+            <GradientStop Color="#FFFFFFFF" Offset="0"/>
+            <GradientStop Color="#FF393939" Offset="1"/>
+        </LinearGradientBrush.GradientStops>
+    </LinearGradientBrush>
 
 </ResourceDictionary>

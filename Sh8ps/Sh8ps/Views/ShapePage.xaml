@@ -5,45 +5,17 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     Style="{StaticResource PageStyle}"
-    DataContext="{Binding BlankViewModel, Source={StaticResource Locator}}"
+    DataContext="{Binding ShapeViewModel, Source={StaticResource Locator}}"
     mc:Ignorable="d">
-    <Grid
-        x:Name="ContentArea"
-        Margin="{StaticResource MediumLeftRightMargin}">
-
-        <Grid.RowDefinitions>
-            <RowDefinition x:Name="TitleRow" Height="48"/>
-            <RowDefinition Height="*"/>
-        </Grid.RowDefinitions>
-
-        <TextBlock
-            x:Name="TitlePage"
-            x:Uid="Blank_Title"
-            Style="{StaticResource PageTitleStyle}" />
-
-        <Grid 
-            Grid.Row="1" 
-            Background="{ThemeResource SystemControlPageBackgroundChromeLowBrush}">
-            <!--The SystemControlPageBackgroundChromeLowBrush background represents where you should place your content. 
-                Place your content here.-->
-        </Grid>
-        <!--  Adaptive triggers  -->
-        <VisualStateManager.VisualStateGroups>
-            <VisualStateGroup x:Name="WindowStates">
-                <VisualState x:Name="WideState">
-                    <VisualState.StateTriggers>
-                        <AdaptiveTrigger MinWindowWidth="640"/>
-                    </VisualState.StateTriggers>
-                </VisualState>
-                <VisualState x:Name="NarrowState">
-                    <VisualState.StateTriggers>
-                        <AdaptiveTrigger MinWindowWidth="0"/>
-                    </VisualState.StateTriggers>
-                    <VisualState.Setters>
-                        <Setter Target="TitlePage.Margin" Value="48,0,12,7"/>
-                    </VisualState.Setters>
-                </VisualState>
-            </VisualStateGroup>
-        </VisualStateManager.VisualStateGroups>
+    <Grid Background="{StaticResource backgroundBrush}" >
+        <Canvas x:Name="root" />
+        <InkCanvas x:Name="inkCanvas"/>
     </Grid>
+    <Page.BottomAppBar>
+        <CommandBar IsOpen="True" IsSticky="True" LightDismissOverlayMode="Off">
+            <AppBarButton Label="Clear Shapes" Icon="Clear" Click="AppBarButton_Click"/>
+            <AppBarToggleButton x:Name="animationToggle" Label="Animate Shapes" Icon="SlideShow" IsChecked="False" Checked="animationToggle_Checked" Unchecked="animationToggle_Unchecked"/>
+            <AppBarToggleButton Label="Move Shapes" Icon="MoveToFolder" IsChecked="False" Checked="AppBarToggleButton_Checked" Unchecked="AppBarToggleButton_Unchecked"/>
+        </CommandBar>
+    </Page.BottomAppBar>
 </Page>

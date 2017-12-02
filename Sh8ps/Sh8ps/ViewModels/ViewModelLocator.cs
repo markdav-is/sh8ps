@@ -27,7 +27,7 @@ namespace Sh8ps.ViewModels
 
         public ChartViewModel ChartViewModel => ServiceLocator.Current.GetInstance<ChartViewModel>();
 
-        public ShapeViewModel BlankViewModel => ServiceLocator.Current.GetInstance<ShapeViewModel>();
+        public ShapeViewModel ShapeViewModel => ServiceLocator.Current.GetInstance<ShapeViewModel>();
 
         public MainViewModel MainViewModel => ServiceLocator.Current.GetInstance<MainViewModel>();
 
