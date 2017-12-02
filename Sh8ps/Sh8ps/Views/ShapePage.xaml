@@ -7,10 +7,51 @@
     Style="{StaticResource PageStyle}"
     DataContext="{Binding ShapeViewModel, Source={StaticResource Locator}}"
     mc:Ignorable="d">
-    <Grid Background="{StaticResource backgroundBrush}" >
-        <Canvas x:Name="root" />
-        <InkCanvas x:Name="inkCanvas"/>
+    <Grid
+        x:Name="ContentArea"
+        Margin="{StaticResource MediumLeftRightMargin}">
+
+        <Grid.RowDefinitions>
+            <RowDefinition x:Name="TitleRow" Height="48"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <TextBlock
+            x:Name="TitlePage"
+            x:Uid="Shape_Title"
+            Style="{StaticResource PageTitleStyle}" />
+
+        <Grid 
+            Grid.Row="1" 
+            Background="{ThemeResource SystemControlPageBackgroundChromeLowBrush}">
+            <!--The SystemControlPageBackgroundChromeLowBrush background represents where you should place your content. 
+                Place your content here.-->
+            <Grid Background="{StaticResource backgroundBrush}" >
+                <Canvas x:Name="root" />
+                <InkCanvas x:Name="inkCanvas"/>
+            </Grid>
+        </Grid>
+        <!--  Adaptive triggers  -->
+        <VisualStateManager.VisualStateGroups>
+            <VisualStateGroup x:Name="WindowStates">
+                <VisualState x:Name="WideState">
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="640"/>
+                    </VisualState.StateTriggers>
+                </VisualState>
+                <VisualState x:Name="NarrowState">
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="0"/>
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        <Setter Target="TitlePage.Margin" Value="48,0,12,7"/>
+                    </VisualState.Setters>
+                </VisualState>
+            </VisualStateGroup>
+        </VisualStateManager.VisualStateGroups>
     </Grid>
+    
+    
     <Page.BottomAppBar>
         <CommandBar IsOpen="True" IsSticky="True" LightDismissOverlayMode="Off">
             <AppBarButton Label="Clear Shapes" Icon="Clear" Click="AppBarButton_Click"/>
