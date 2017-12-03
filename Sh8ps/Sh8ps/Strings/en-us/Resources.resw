@@ -231,4 +231,10 @@ Suspendisse dui purus, scelerisque at, vulputate vitae, pretium mattis, nunc. Ma
     <value>Welcome</value>
     <comment>First use prompt message title</comment>
   </data>
+  <data name="Settings_MusicLink.Content" xml:space="preserve">
+    <value>Music By ZBW</value>
+  </data>
+  <data name="Settings_MusicLink.NavigateUri" xml:space="preserve">
+    <value>https://soundcloud.com/zeebeedoubleu/tracks</value>
+  </data>
 </root>

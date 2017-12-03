@@ -19,9 +19,10 @@
     <ScrollViewer>
         <StackPanel>
             <TextBlock x:Uid="FirstRun_Body" TextWrapping="WrapWholeWords">
-                <Run>Replace the content of this dialog with whatever content is appropriate to your app.</Run><LineBreak/>
-                <Run>You might want to explain key features or functionality.</Run><LineBreak/>
-                <Run>Don't feel restricted to just text. You can also include images and animations if you wish too.</Run>
+                <Run>Sh8ps is a Ludem Dare 40 Theme 'Theme: The more you have, the worse it is'.</Run><LineBreak/><LineBreak/>
+                <Run>It's was created in a weekend in the Fall of 2017 </Run><LineBreak/><LineBreak/>
+                <Run>My Goal were to investigate XAML as a gaming platform, Deploy an app using .NET Core 2 and Standard 2 outside the store, play around with acrylic and light fluent design elements.</Run>
+                
             </TextBlock>
         </StackPanel>
     </ScrollViewer>
