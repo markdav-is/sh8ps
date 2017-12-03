@@ -30,7 +30,7 @@ namespace Sh8ps.ViewModels
             // this is where we start the game by drawing and keeping track
             // of the shapes to be zapped
             Targets = new List<Sh8pe>();
-            Center = new Point((int)root.Width / 2, (int)root.Height / 2);
+            Center = new Point((int)inkCanvas.ActualWidth / 2, (int)inkCanvas.ActualHeight / 2);
             for (int i = 0; i < targets; i++)
             {
                 var newshape = GeRandoTargetShape(level);

@@ -51,14 +51,17 @@ namespace Sh8ps.Views
             strokeTimer.Interval = TimeSpan.FromMilliseconds(500d);
             strokeTimer.Tick += StrokeTimer_Tick;
 
+            this.Loaded += ShapePage_Loaded;
+
         }
 
-        protected override void OnNavigatedTo(NavigationEventArgs e)
+        private void ShapePage_Loaded(object sender, RoutedEventArgs e)
         {
-            base.OnNavigatedTo(e);
+            var x = background.ActualWidth;
+            var xs = root.ActualWidth;
+            var xd = inkCanvas.ActualWidth;
             ViewModel.InitGame(root, inkCanvas, 3, 1);
         }
-
 
         private void StrokeInput_StrokeStarted(InkStrokeInput sender, PointerEventArgs args)
         {

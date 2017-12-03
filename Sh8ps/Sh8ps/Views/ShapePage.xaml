@@ -26,7 +26,7 @@
             Background="{ThemeResource SystemControlPageBackgroundChromeLowBrush}">
             <!--The SystemControlPageBackgroundChromeLowBrush background represents where you should place your content. 
                 Place your content here.-->
-            <Grid Background="{StaticResource backgroundBrush}" >
+            <Grid x:Name="background" Background="{StaticResource backgroundBrush}" >
                 <Canvas x:Name="root" />
                 <InkCanvas x:Name="inkCanvas"/>
             </Grid>
