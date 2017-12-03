@@ -41,13 +41,31 @@ namespace Sh8ps.ViewModels
                     Speed = level 
                 });
                 root.Children.Add(newshape);
+                // put new things in the middle
+                Canvas.SetTop(newshape, Center.Y - (newshape.Height / 2));
+                Canvas.SetLeft(newshape, Center.X - (newshape.Width / 2));
             }
 
             gameTimer = new DispatcherTimer();
             gameTimer.Interval = TimeSpan.FromMilliseconds(500d);
             gameTimer.Tick += GameTimer_Tick;
 
+        }
 
+        private (double x, double y) GetVectorEndpoint(Sh8pe sh8pe)
+        {
+            return GetVectorEndpoint(
+                Canvas.GetLeft(sh8pe.Shape),
+                Canvas.GetTop(sh8pe.Shape),
+                sh8pe.DirectionDegree,
+                sh8pe.Speed
+                );
+        }
+
+        private (double x, double y) GetVectorEndpoint(double x, double y, double angle, double velocity) {
+            var velocity_X = velocity * Math.Cos(angle);
+            var velocity_Y = velocity * Math.Sin(angle);
+            return (x + velocity_X, y + velocity_Y);
         }
 
         private void GameTimer_Tick(object sender, object e)
@@ -56,7 +74,10 @@ namespace Sh8ps.ViewModels
 
             foreach (var sh8pe in Targets)
             {
-
+                // move the shapes
+                var newXY = GetVectorEndpoint(sh8pe);
+                Canvas.SetTop(sh8pe.Shape, newXY.x);
+                Canvas.SetLeft(sh8pe.Shape, newXY.y);
             }
             
             gameTimer.Start();
@@ -82,7 +103,7 @@ namespace Sh8ps.ViewModels
                         StrokeThickness = 1,
                         Stroke = new SolidColorBrush(Colors.Black),
                         Width = width,
-                        Height = height
+                        Height = height,
                     };
                 //case 2:  // add triangles
                 //    break;
