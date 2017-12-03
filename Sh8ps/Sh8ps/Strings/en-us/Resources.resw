@@ -182,19 +182,19 @@
     <comment>Light theme text for Settings</comment>
   </data>
   <data name="Settings_About.Text" xml:space="preserve">
-    <value>About this application</value>
+    <value>About Sh8ps</value>
     <comment>About this application title for Settings</comment>
   </data>
   <data name="Settings_AboutDescription.Text" xml:space="preserve">
-    <value>Settings page placeholder text.  Your app description goes here.</value>
+    <value>Sh8ps is a Ludem Dare 40 Game Jam Experiment</value>
     <comment>About this application description for Settings</comment>
   </data>
   <data name="Settings_PrivacyTermsLink.Content" xml:space="preserve">
-    <value>Privacy Statement</value>
+    <value>This game doesn't store or trasnmit any data</value>
     <comment>Privacy Statement link content for Settings</comment>
   </data>
   <data name="Settings_PrivacyTermsLink.NavigateUri" xml:space="preserve">
-    <value>https://YourPrivacyUrlGoesHere/</value>
+    <value>http://sh8ps.com</value>
     <comment>Here is your Privacy Statement url for Settings</comment>
   </data>
   <data name="Settings_Personalization.Text" xml:space="preserve">
