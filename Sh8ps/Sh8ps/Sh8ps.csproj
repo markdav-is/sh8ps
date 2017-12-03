@@ -297,7 +297,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include=".editorconfig" />
-    <None Include="Connected Services\HockeyApp\ConnectedService.json" />
     <None Include="Sh8ps_StoreKey.pfx" />
     <None Include="Sh8ps_TemporaryKey.pfx" />
   </ItemGroup>
