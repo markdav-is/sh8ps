@@ -5,11 +5,14 @@
     <Style TargetType="Page" x:Key="PageStyle">
         <Setter Property="Background" Value="{ThemeResource ApplicationPageBackgroundThemeBrush}" />
     </Style>
-    <LinearGradientBrush x:Key="backgroundBrush" StartPoint="0.5, 0" EndPoint="0.5,1">
-        <LinearGradientBrush.GradientStops>
-            <GradientStop Color="#FFFFFFFF" Offset="0"/>
-            <GradientStop Color="#FF393939" Offset="1"/>
-        </LinearGradientBrush.GradientStops>
-    </LinearGradientBrush>
-
+    
+    <ImageBrush x:Key="backgroundBrush" ImageSource="ms-appx:///Assets/Clear_Blue_Sky.jpg" Stretch="Fill" />
+    <ImageBrush x:Key="backgroundBrush1" ImageSource="ms-appx:///Assets/Clear_Blue_Sky.jpg" Stretch="Fill" />
+    <ImageBrush x:Key="backgroundBrush2" ImageSource="ms-appx:///Assets/Looking_up_towards_the_Sky.jpg" Stretch="Fill" />
+    <ImageBrush x:Key="backgroundBrush3" ImageSource="ms-appx:///Assets/Look_up_the_spring_sky_in_Jesenice.jpg" Stretch="Fill" />
+    <ImageBrush x:Key="backgroundBrush4" ImageSource="ms-appx:///Assets/White_Clouds_in_sky.jpg" Stretch="Fill" />
+    <ImageBrush x:Key="backgroundBrush5" ImageSource="ms-appx:///Assets/Paris_courtyard_towards_the_sky.jpg" Stretch="Fill" />
+    <ImageBrush x:Key="backgroundBrush6" ImageSource="ms-appx:///Assets/Look_up_into_the_sky_(7516981798).jpg" Stretch="Fill" />
+    <ImageBrush x:Key="backgroundBrush7" ImageSource="ms-appx:///Assets/Fireinthesky.jpg" Stretch="Fill" />
+    <ImageBrush x:Key="backgroundBrush8" ImageSource="ms-appx:///Assets/Looking_up_at_fall_sky_from_under_Natural_Bridge_State_Park_(30432896775).jpg" Stretch="Fill" />
 </ResourceDictionary>

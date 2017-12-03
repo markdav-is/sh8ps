@@ -123,6 +123,7 @@
     <Compile Include="Helpers\EnumToBooleanConverter.cs" />
     <Compile Include="Helpers\Json.cs" />
     <Compile Include="Helpers\SettingsStorageExtensions.cs" />
+    <Compile Include="Models\Sh8pe.cs" />
     <Compile Include="Models\DataPoint.cs" />
     <Compile Include="Models\SampleOrder.cs" />
     <Compile Include="Services\ActivationService.cs" />
@@ -229,6 +230,15 @@
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
+    <Content Include="Assets\Clear_Blue_Sky.jpg" />
+    <Content Include="Assets\Fireinthesky.jpg" />
+    <Content Include="Assets\LD40 Acrylic Tetris Loop.wav" />
+    <Content Include="Assets\Looking_up_at_fall_sky_from_under_Natural_Bridge_State_Park_%2830432896775%29.jpg" />
+    <Content Include="Assets\Looking_up_towards_the_Sky.jpg" />
+    <Content Include="Assets\Look_up_into_the_sky_%287516981798%29.jpg" />
+    <Content Include="Assets\Look_up_the_spring_sky_in_Jesenice.jpg" />
+    <Content Include="Assets\Paris_courtyard_towards_the_sky.jpg" />
+    <Content Include="Assets\White_Clouds_in_sky.jpg" />
     <Content Include="Properties\Default.rd.xml" />
     <Content Include="Assets\LockScreenLogo.scale-200.png" />
     <Content Include="Assets\SplashScreen.scale-200.png" />

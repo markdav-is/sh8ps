@@ -50,6 +50,9 @@ namespace Sh8ps.Views
             strokeTimer = new DispatcherTimer();
             strokeTimer.Interval = TimeSpan.FromMilliseconds(500d);
             strokeTimer.Tick += StrokeTimer_Tick;
+
+           
+
         }
 
 
@@ -95,6 +98,8 @@ namespace Sh8ps.Views
             {
                 if (inkAnalyzer.AnalysisRoot.Children.Last().Kind == InkAnalysisNodeKind.InkDrawing)
                 {
+                    // thie things we can recognise:  https://docs.microsoft.com/en-us/uwp/api/windows.ui.input.inking.analysis.inkanalysisdrawingkind
+
                     LinearGradientBrush newRandomBrush = GetRandomGradientBrush();
 
                     InkAnalysisInkDrawing drawing = inkAnalyzer.AnalysisRoot.Children.Last() as InkAnalysisInkDrawing;
