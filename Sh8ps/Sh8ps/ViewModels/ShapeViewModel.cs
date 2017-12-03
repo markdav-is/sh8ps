@@ -71,13 +71,18 @@ namespace Sh8ps.ViewModels
 
         private Shape GeRandoTargetShape(int level)
         {
+            Random rnd = new Random();
+            int width = rnd.Next(10, 20);
+            int height = rnd.Next(10, 20);
+
             switch (level) {
                 case 1:  // circles and elipses
                     return new Ellipse()
                     {
                         StrokeThickness = 1,
                         Stroke = new SolidColorBrush(Colors.Black),
-                        Width = 10
+                        Width = width,
+                        Height = height
                     };
                 //case 2:  // add triangles
                 //    break;

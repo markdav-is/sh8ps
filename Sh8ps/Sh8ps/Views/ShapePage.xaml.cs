@@ -51,8 +51,12 @@ namespace Sh8ps.Views
             strokeTimer.Interval = TimeSpan.FromMilliseconds(500d);
             strokeTimer.Tick += StrokeTimer_Tick;
 
-           
+        }
 
+        protected override void OnNavigatedTo(NavigationEventArgs e)
+        {
+            base.OnNavigatedTo(e);
+            ViewModel.InitGame(root, inkCanvas, 3, 1);
         }
 
 
