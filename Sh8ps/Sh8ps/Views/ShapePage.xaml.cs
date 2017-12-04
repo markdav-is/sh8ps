@@ -101,11 +101,12 @@ namespace Sh8ps.Views
         private async void Analyze()
         {
             InkAnalysisResult result = await inkAnalyzer.AnalyzeAsync();
+            Shape drawnShape = null;
             if (result.Status == InkAnalysisStatus.Updated && inkAnalyzer.AnalysisRoot.Children.Count > 0)
             {
                 if (inkAnalyzer.AnalysisRoot.Children.Last().Kind == InkAnalysisNodeKind.InkDrawing)
                 {
-                    // thie things we can recognise:  https://docs.microsoft.com/en-us/uwp/api/windows.ui.input.inking.analysis.inkanalysisdrawingkind
+                    // the things we can recognise:  https://docs.microsoft.com/en-us/uwp/api/windows.ui.input.inking.analysis.inkanalysisdrawingkind
 
                     LinearGradientBrush newRandomBrush = GetRandomGradientBrush();
 
@@ -140,6 +141,7 @@ namespace Sh8ps.Views
                         ellipse.RenderTransform = transform;
                         ellipse.RenderTransformOrigin = new Point(0.5, 0.5);
                         root.Children.Add(ellipse);
+                        drawnShape = ellipse;
                         if (animationToggle.IsChecked == true)
                         {
                             AddAnimation(ellipse);
@@ -161,6 +163,7 @@ namespace Sh8ps.Views
                         transform.CenterY = drawing.Center.Y;
                         polygon.RenderTransform = transform;
                         root.Children.Add(polygon);
+                        drawnShape = polygon;
                         if (animationToggle.IsChecked == true)
                         {
                             AddAnimation(polygon);
@@ -171,6 +174,13 @@ namespace Sh8ps.Views
                 {
                     // neither ellipse or polygon
                     System.Diagnostics.Debug.WriteLine(inkAnalyzer.AnalysisRoot.Children.Last().Kind.ToString());
+                }
+
+                // see if we have a match
+                if (drawnShape != null) {
+                    if (ViewModel.SeekTarget(drawnShape)) {
+                        root.Children.Remove(drawnShape);  // matchwd
+                    }
                 }
             }
             inkCanvas.InkPresenter.StrokeContainer.Clear();

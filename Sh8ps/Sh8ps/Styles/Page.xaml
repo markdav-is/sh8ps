@@ -15,4 +15,6 @@
     <ImageBrush x:Key="backgroundBrush6" ImageSource="ms-appx:///Assets/Look_up_into_the_sky_(7516981798).jpg" Stretch="Fill" />
     <ImageBrush x:Key="backgroundBrush7" ImageSource="ms-appx:///Assets/Fireinthesky.jpg" Stretch="Fill" />
     <ImageBrush x:Key="backgroundBrush8" ImageSource="ms-appx:///Assets/Looking_up_at_fall_sky_from_under_Natural_Bridge_State_Park_(30432896775).jpg" Stretch="Fill" />
+
+    
 </ResourceDictionary>

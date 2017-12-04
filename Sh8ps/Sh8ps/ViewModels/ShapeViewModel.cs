@@ -24,11 +24,14 @@ namespace Sh8ps.ViewModels
 
         public List<Sh8pe> Targets { get; private set; }
         public Point Center { get; private set; }
+        public Canvas RootCanvas { get; private set; }
+
 
         internal void InitGame(Canvas root, InkCanvas inkCanvas, int targets, int level)
         {
             // this is where we start the game by drawing and keeping track
             // of the shapes to be zapped
+            RootCanvas = root;
             Targets = new List<Sh8pe>();
             Center = new Point((int)inkCanvas.ActualWidth / 2, (int)inkCanvas.ActualHeight / 2);
             for (int i = 0; i < targets; i++)
@@ -49,6 +52,7 @@ namespace Sh8ps.ViewModels
             gameTimer = new DispatcherTimer();
             gameTimer.Interval = TimeSpan.FromMilliseconds(500d);
             gameTimer.Tick += GameTimer_Tick;
+            gameTimer.Start();
 
         }
 
@@ -76,8 +80,10 @@ namespace Sh8ps.ViewModels
             {
                 // move the shapes
                 var newXY = GetVectorEndpoint(sh8pe);
-                Canvas.SetTop(sh8pe.Shape, newXY.x);
-                Canvas.SetLeft(sh8pe.Shape, newXY.y);
+                Canvas.SetTop(sh8pe.Shape, newXY.y);
+                Canvas.SetLeft(sh8pe.Shape, newXY.x);
+                sh8pe.Shape.Width += sh8pe.Speed;
+                sh8pe.Shape.Height += sh8pe.Speed;
             }
             
             gameTimer.Start();
@@ -119,6 +125,23 @@ namespace Sh8ps.ViewModels
             double dX = p1.X - p0.X;
             double dY = p1.Y - p0.Y;
             return Math.Sqrt(dX * dX + dY * dY);
+        }
+
+        internal bool SeekTarget(Shape drawnShape)
+        {
+            //check drawn shapes agains targets
+            foreach (var sh8pe in Targets)
+            {
+                // are they the same type?
+                if (sh8pe.Shape.GetType().IsAssignableFrom(drawnShape.GetType())) {
+                    // match
+                    RootCanvas.Children.Remove(sh8pe.Shape);
+                    sh8pe.Shape = null;
+                    break;  // you only get one
+                }
+            }
+            return Targets.RemoveAll(_ => _.Shape == null) > 0;
+
         }
     }
 }
