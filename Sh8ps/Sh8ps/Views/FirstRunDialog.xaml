@@ -18,10 +18,7 @@
     </ContentDialog.TitleTemplate>
     <ScrollViewer>
         <StackPanel>
-            <TextBlock x:Uid="FirstRun_Body" TextWrapping="WrapWholeWords">
-                <Run>Sh8ps is a Ludem Dare 40 Theme 'Theme: The more you have, the worse it is'.</Run><LineBreak/><LineBreak/>
-                <Run>It's was created in a weekend in the Fall of 2017 </Run><LineBreak/><LineBreak/>
-                <Run>My Goal were to investigate XAML as a gaming platform, Deploy an app using .NET Core 2 and Standard 2 outside the store, play around with acrylic and light fluent design elements.</Run>
+            <TextBlock x:Uid="FirstRun_Body" TextWrapping="WrapWholeWords" FontFamily="Segoe UI">
                 
             </TextBlock>
         </StackPanel>

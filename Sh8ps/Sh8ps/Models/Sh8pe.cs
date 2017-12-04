@@ -11,6 +11,6 @@ namespace Sh8ps.Models
         public double DirectionDegree { get; set; }
         public double Speed { get; set; }
         public double Gravity { get; set; }
-
+        public Shape Seeker { get; internal set; }
     }
 }

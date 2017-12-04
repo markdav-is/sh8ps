@@ -60,7 +60,7 @@ namespace Sh8ps.Views
             var x = background.ActualWidth;
             var xs = root.ActualWidth;
             var xd = inkCanvas.ActualWidth;
-            ViewModel.InitGame(root, inkCanvas, 3, 1);
+            ViewModel.InitGame(root, 3, 1);
         }
 
         private void StrokeInput_StrokeStarted(InkStrokeInput sender, PointerEventArgs args)
@@ -178,9 +178,7 @@ namespace Sh8ps.Views
 
                 // see if we have a match
                 if (drawnShape != null) {
-                    if (ViewModel.SeekTarget(drawnShape)) {
-                        root.Children.Remove(drawnShape);  // matchwd
-                    }
+                    ViewModel.SeekTarget(drawnShape);
                 }
             }
             inkCanvas.InkPresenter.StrokeContainer.Clear();
