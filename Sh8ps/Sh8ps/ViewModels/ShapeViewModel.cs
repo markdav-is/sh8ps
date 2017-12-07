@@ -10,6 +10,8 @@ using Windows.UI;
 using Sh8ps.Models;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Media.Animation;
+using System.Numerics;
+using System.Diagnostics;
 
 namespace Sh8ps.ViewModels
 {
@@ -44,9 +46,7 @@ namespace Sh8ps.ViewModels
                 var newshape = GeRandoTargetShape(level);
                 Targets.Add(new Sh8pe() {
                     Shape = newshape,
-                    DirectionDegree = GeRandoDirection(),
-                    Gravity = level,
-                    Speed = level
+                    ShapeVector = GeRandoVector()
                 });
                 root.Children.Add(newshape);
                 // put new things in the middle
@@ -61,57 +61,68 @@ namespace Sh8ps.ViewModels
 
         }
 
-        private (double x, double y) GetVectorEndpoint(Sh8pe sh8pe)
+        private Vec GeRandoVector()
         {
-            return GetVectorEndpoint(
-                Canvas.GetLeft(sh8pe.Shape),
-                Canvas.GetTop(sh8pe.Shape),
-                sh8pe.DirectionDegree,
-                sh8pe.Speed
-                );
+            Random rnd = new Random();
+
+            var vec = new Vec
+            {
+                Y = rnd.Next(-100, 100)*.001,
+                X = rnd.Next(-100, 100)*.001
+            };
+
+            return vec;
         }
 
-        private (double x, double y) GetVectorEndpoint(double x, double y, double angle, double velocity) {
-            var velocity_X = velocity * Math.Cos(angle);
-            var velocity_Y = velocity * Math.Sin(angle);
-            return (x + velocity_X, y + velocity_Y);
-        }
-
+  
+      
         private void GameTimer_Tick(object sender, object e)
         {
             gameTimer.Stop();
 
             foreach (var sh8pe in Targets)
             {
+                var top0 = Canvas.GetTop(sh8pe.Shape);
+                var left0 = Canvas.GetLeft(sh8pe.Shape);
+
+                var topFinal = top0 + 5 * sh8pe.ShapeVector.X;
+                var leftFinal = left0 + 5 * sh8pe.ShapeVector.Y;
+
                 // move the shapes
-                var newXY = GetVectorEndpoint(sh8pe);
-                Canvas.SetTop(sh8pe.Shape, newXY.y);
-                Canvas.SetLeft(sh8pe.Shape, newXY.x);
-                sh8pe.Shape.Width += sh8pe.Speed;
-                sh8pe.Shape.Height += sh8pe.Speed;
-            }
+                Canvas.SetTop(sh8pe.Shape, topFinal);
+                Canvas.SetLeft(sh8pe.Shape, leftFinal);
+                sh8pe.Shape.Width += 1;
+                sh8pe.Shape.Height += 1;
+                if (sh8pe.Seeker != null) {
 
-            // move the seekers
-            foreach (var sh8pe in Targets.Where(_=>_.Seeker!=null))
-            {
-                var dir = GetDirecton(
-                            new Point((int)Canvas.GetLeft(sh8pe.Shape),
-                                      (int)Canvas.GetTop(sh8pe.Shape)),
-                            new Point((int)Canvas.GetLeft(sh8pe.Seeker),
-                                      (int)Canvas.GetTop(sh8pe.Seeker)));
+                    top0 = Canvas.GetTop(sh8pe.Seeker);
+                    left0 = Canvas.GetLeft(sh8pe.Seeker);
+                    topFinal = top0 + 5 * sh8pe.SeekerVector.X;
+                    leftFinal = left0 + 5 * sh8pe.SeekerVector.Y;
 
-                var newXY = GetVectorEndpoint(
-                   Canvas.GetLeft(sh8pe.Seeker),
-                   Canvas.GetTop(sh8pe.Seeker),
-                   dir,
-                   sh8pe.Speed * 2);
+                    // move the shapes
+                    Canvas.SetTop(sh8pe.Seeker, topFinal);
+                    Canvas.SetLeft(sh8pe.Seeker, leftFinal);
+                    sh8pe.Shape.Width -= 1;
+                    sh8pe.Shape.Height -= 1;
 
-                Canvas.SetTop(sh8pe.Seeker, newXY.y);
-                Canvas.SetLeft(sh8pe.Seeker, newXY.x);
+                    // recalc the vector
+                    var targetPoint = new Vec
+                    {
+                        X = Canvas.GetTop(sh8pe.Shape),
+                        Y = Canvas.GetLeft(sh8pe.Shape)
+                    };
 
-                sh8pe.Seeker.Width -= sh8pe.Speed;
-                sh8pe.Seeker.Height -= sh8pe.Speed;
+                    var seekerPoint = new Vec
+                    {
+                        X = Canvas.GetTop(sh8pe.Seeker),
+                        Y = Canvas.GetLeft(sh8pe.Seeker)
+                    };
 
+                    sh8pe.SeekerVector = GetVector(targetPoint, seekerPoint);
+
+
+                }
             }
 
             //check for collisions
@@ -135,16 +146,13 @@ namespace Sh8ps.ViewModels
             gameTimer.Start();
         }
 
-        private bool Collision(Shape a, Shape b) {
-            double bottom = Canvas.GetTop(a) + a.Height;
-            double top = Canvas.GetTop(a);
-            double left = Canvas.GetLeft(a);
-            double right = Canvas.GetLeft(a) + a.Width;
+        private bool Collision(Shape a, Shape b, double zone = 5) {
+            var realzone = zone * zone;
+            var topdis = Canvas.GetTop(a) - Canvas.GetTop(b);
+            var leftdis = Canvas.GetLeft(a) - Canvas.GetLeft(b);
 
-            return !((bottom < Canvas.GetTop(b)) ||
-                         (top > Canvas.GetTop(b) + b.Height) ||
-                         (left > Canvas.GetLeft(b) + b.Width) ||
-                         (right < Canvas.GetLeft(b)));
+            var d = (topdis * topdis) + (leftdis * leftdis);
+            return d < realzone;            
         } 
 
         private double GetDirecton(Point target, Point seeker)
@@ -208,6 +216,36 @@ namespace Sh8ps.ViewModels
             return Math.Sqrt(dX * dX + dY * dY);
         }
 
+        public Vec GetVector(Point p0, Point p1)
+        {
+            
+            double dX = p1.X - p0.X;
+            double dY = p1.Y - p0.Y;
+            double dist = Math.Sqrt(dX * dX + dY * dY);
+           // dX = dX / dist;
+            //dY = dY / dist;
+
+            var result = new Vec { X = dX * 5, Y = dY * 5 };
+            Debug.WriteLine($"vec: x:{result.X}, y:{result.Y}");
+            return result;
+        }
+
+        public Vec GetVector(Vec p0, Vec p1)
+        {
+            Debug.WriteLine($"vec: p0 x:{p0.X}, p0 y:{p0.Y}");
+            Debug.WriteLine($"vec: p1 x:{p1.X}, p1 y:{p1.Y}");
+
+            double dX = p1.X - p0.X;
+            double dY = p1.Y - p0.Y;
+            double dist = Math.Sqrt(dX * dX + dY * dY);
+            // dX = dX / dist;
+            //dY = dY / dist;
+
+            var result = new Vec { X = dX * 5, Y = dY * 5 };
+            Debug.WriteLine($"vec: out x:{result.X}, out y:{result.Y}");
+            return result;
+        }
+
         internal void SeekTarget(Shape drawnShape)
         {
             //check drawn shapes agains targets
@@ -218,7 +256,22 @@ namespace Sh8ps.ViewModels
                     // match
                     sh8pe.Seeker = drawnShape;
                     sh8pe.Shape.Fill = drawnShape.Fill;
+
+                    var targetPoint = new Vec
+                    {
+                        X = Canvas.GetTop(sh8pe.Shape),
+                        Y = Canvas.GetLeft(sh8pe.Shape)
+                    };
+                    var seekerPoint = new Vec
+                    {
+                        X = Canvas.GetTop(sh8pe.Seeker),
+                        Y = Canvas.GetLeft(sh8pe.Seeker)
+                    };
+          
+                    sh8pe.SeekerVector = GetVector(targetPoint,seekerPoint);
+
                     AddAnimation(drawnShape);
+
                     break;  // you only get one
                 }
             }
